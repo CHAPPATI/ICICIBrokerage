@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ICICI Brokerage Calculator</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container-fluid header">
+        <h3>ICICI Intraday Brokerage</h3>
+    </div>
+    <div class="container mt-3">
+        <form class="needs-validation" onsubmit="return false">
+            <div class="form-row">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <label for="BuyQuantity">Buy Quantity</label>
+                    <input type="number" class="form-control" id="BuyQuantity" placeholder="Enter Buy Quantity"
+                        required>
+                </div>
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <label for="BuyPrice">Buy Price</label>
+                    <input type="number" class="form-control" id="BuyPrice" placeholder="Enter Buy Price Per Quantity"
+                        required step="0.01">
+                </div>
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <label for="SellQuantity">Sell Quantity</label>
+                    <input type="number" class="form-control" id="SellQuantity" placeholder="Enter Sell Quantity">
+                </div>
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <label for="SellPrice">Sell Price</label>
+                    <input type="number" class="form-control" id="SellPrice" placeholder="Enter Sell Price Per Quantity"
+                        step="0.01">
+                </div>
+
+            </div>
+            <!-- <fieldset class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="TradeType" id="Buy" value="Buy" checked>
+                            <label class="form-check-label" for="Buy">Buy</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="TradeType" id="Sell" value="Sell">
+                            <label class="form-check-label" for="Sell">Sell</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset> -->
+            <div class="form-row mb-3">
+                <button onclick="CalculateBrokerage()" class="btn btn-primary" type="submit">Calculate</button>
+            </div>
+        </form>
+        <div id="result" style="display: none;">
+            <form novalidate>
+                <div class="form-row mb-3">
+                    <label for="NetAmount">Net Amount</label>
+                    <input type="number" class="form-control" id="NetAmount" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="TotalDeduction">Total Deduction</label>
+                    <input type="number" class="form-control" id="TotalDeduction" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="PayOut" id="PayLabel">Payout Obligation</label>
+                    <input type="number" class="form-control" id="PayOut" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="Brokerage">Brokerage</label>
+                    <input type="number" class="form-control" id="Brokerage" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="ETC">Exchange Transaction Charges</label>
+                    <input type="number" class="form-control" id="ETC" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="SEBI">SEBI Turnover Charges</label>
+                    <input type="number" class="form-control" id="SEBI" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-md-4">
+                        <label for="GST">Total GST</label>
+                        <input type="number" class="form-control" id="GST" readonly>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label for="CGST">CGST</label>
+                        <input type="number" class="form-control" id="CGST" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="SGST">SGST</label>
+                        <input type="number" class="form-control" id="SGST" readonly>
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="SD">Stamp Duty</label>
+                    <input type="number" class="form-control" id="SD" readonly>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="STT">Securities Transaction Tax</label>
+                    <input type="number" class="form-control" id="STT" readonly>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/jquery.3.4.1.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
