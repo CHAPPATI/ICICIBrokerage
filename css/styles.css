@@ -19,3 +19,9 @@ h3{
   padding: 10px;
   text-align: center;
 }
+
+@media screen and (max-width: 320px) {
+  .form-check-label{
+    font-size: medium;
+  }  
+}
