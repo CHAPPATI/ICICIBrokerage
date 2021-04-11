@@ -5,56 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1024">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ICICI Brokerage Calculator</title>
+    <title>ICICI Direct Trading Profit Analyzer</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <div class="container-fluid header">
-        <h3>ICICI Intraday Brokerage</h3>
+        <h3>ICICI Profit analyzer</h3>
     </div>
     <div class="container mt-3">
         <form class="needs-validation" onsubmit="return false">
             <div class="form-row">
-                <div class="col-md-3 col-sm-12 mb-3">
+                <div class="col-md-12 mb-2">
+                    <div class="form-check mr-2" style="display: inline;">
+                        <input class="form-check-input" type="checkbox" value="intraday" id="intraday" checked>
+                        <label class="form-check-label" for="intraday">Intraday</label>
+                    </div>
+                    <div class="form-check" style="display: inline;">
+                        <input class="form-check-input" type="checkbox" value="positional" id="positional">
+                        <label class="form-check-label" for="positional">Positional</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 mb-3">
                     <label for="BuyQuantity">Buy Quantity</label>
                     <input type="number" class="form-control" id="BuyQuantity" placeholder="Enter Buy Quantity"
                         required>
                 </div>
-                <div class="col-md-3 col-sm-12 mb-3">
+                <div class="col-md-6 col-sm-12 mb-3">
                     <label for="BuyPrice">Buy Price</label>
                     <input type="number" class="form-control" id="BuyPrice" placeholder="Enter Buy Price Per Quantity"
                         required step="0.01">
                 </div>
-                <div class="col-md-3 col-sm-12 mb-3">
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 col-sm-12 mb-3">
                     <label for="SellPrice">Sell Price</label>
                     <input type="number" class="form-control" id="SellPrice" placeholder="Enter Sell Price Per Quantity"
                         step="0.01">
                 </div>
-                <div class="col-md-3 col-sm-12 mb-3">
+                <div class="col-md-6 col-sm-12 mb-3">
                     <label for="SellQuantity">Sell Quantity</label>
                     <input type="number" class="form-control" id="SellQuantity" placeholder="Enter Sell Quantity">
                 </div>
-
-
             </div>
-            <!-- <fieldset class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="TradeType" id="Buy" value="Buy" checked>
-                            <label class="form-check-label" for="Buy">Buy</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="TradeType" id="Sell" value="Sell">
-                            <label class="form-check-label" for="Sell">Sell</label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset> -->
             <div class="form-row mb-3">
                 <button onclick="CalculateBrokerage()" class="btn btn-primary" type="submit">Calculate</button>
             </div>
@@ -62,8 +58,14 @@
         <div id="result" style="display: none;">
             <form novalidate>
                 <div class="form-row mb-3">
-                    <label for="NetAmount">Net Amount</label>
-                    <input type="number" class="form-control" id="NetAmount" readonly>
+                    <div class="col-md-6">
+                        <label for="NetAmount">Net Amount</label>
+                        <input type="number" class="form-control" id="NetAmount" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="AmountRequired">Total Buy Price</label>
+                        <input type="number" class="form-control" id="AmountRequired" readonly>
+                    </div>
                 </div>
                 <div class="form-row mb-3">
                     <label for="TotalDeduction">Total Deduction</label>
