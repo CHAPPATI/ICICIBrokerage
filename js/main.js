@@ -8,6 +8,7 @@ function CalculateBrokerage() {
     const isIntraday = document.getElementById('intraday').checked;
     if(isIntraday){
         if (buyQuantity && Number.isInteger(buyQuantity) && buyPrice && (sellPrice || sellPrice === 0)) {
+            document.getElementsByClassName('depoDiv')[0].style.display = 'none';
             document.getElementById('result').style.display = 'block'
             const totBuyPrice = buyQuantity * buyPrice;
             const totSellPrice = sellQuantity * sellPrice;
@@ -44,6 +45,7 @@ function CalculateBrokerage() {
     } else {
         if (buyQuantity && Number.isInteger(buyQuantity) && buyPrice && (sellPrice || sellPrice === 0)) {
             document.getElementById('result').style.display = 'block'
+            document.getElementsByClassName('depoDiv')[0].style.display = 'block';
             const totBuyPrice = buyQuantity * buyPrice;
             const totSellPrice = sellQuantity * sellPrice;
             const buyBrokerage = (totBuyPrice > 9259.0) ?
@@ -60,7 +62,8 @@ function CalculateBrokerage() {
             const totalGST = gst * 2;
             const sd = 0;
             const stt = RoundOffValue((totSellPrice + totBuyPrice) * 0.001);
-            const totalDed = RoundOffValue(totalBrokerage + etc + sebi + totalGST + stt + sd);
+            const depoCharges = 25;
+            const totalDed = RoundOffValue(totalBrokerage + etc + sebi + totalGST + stt + sd + depoCharges);
             const netAmount = payOut - totalDed;
             document.getElementById('NetAmount').value = netAmount;
             document.getElementById('AmountRequired').value = totBuyPrice;
@@ -75,6 +78,7 @@ function CalculateBrokerage() {
             document.getElementById('GST').value = totalGST;
             document.getElementById('SD').value = sd;
             document.getElementById('STT').value = stt;
+            document.getElementById('DepositoryCharges').value = depoCharges;
         }
     }
 }
@@ -88,9 +92,11 @@ $(window).on('load', function () {
         $('#SellQuantity').val(this.value);
     });
     $('#intraday').change(function(){
-        document.getElementById('positional').checked = ! $(this).is(":checked");
+        if(document.getElementById('intraday').checked)
+            document.getElementById('positional').checked = false;
     });
     $('#positional').change(function(){
-        document.getElementById('intraday').checked = ! $(this).is(":checked");
+        if(document.getElementById('positional').checked)
+            document.getElementById('intraday').checked = false;
     });
 });
