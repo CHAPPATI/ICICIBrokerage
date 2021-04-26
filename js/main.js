@@ -6,11 +6,10 @@ function CalculateBrokerage() {
     const sellPrice = document.getElementById('SellPrice').value ?
         parseFloat(document.getElementById('SellPrice').value) : 0;
     const isIntraday = document.getElementById('intraday').checked;
-    const isPositional = document.getElementById('positional').checked;
-    if (isIntraday) {
+    if(isIntraday){
         if (buyQuantity && Number.isInteger(buyQuantity) && buyPrice && (sellPrice || sellPrice === 0)) {
             document.getElementsByClassName('depoDiv')[0].style.display = 'none';
-            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').style.display = 'block'
             const totBuyPrice = buyQuantity * buyPrice;
             const totSellPrice = sellQuantity * sellPrice;
             const buyBrokerage = (totBuyPrice > 55555.0) ?
@@ -43,7 +42,7 @@ function CalculateBrokerage() {
             document.getElementById('SD').value = sd;
             document.getElementById('STT').value = stt;
         }
-    } else if (isPositional) {
+    } else {
         if (buyQuantity && Number.isInteger(buyQuantity) && buyPrice && (sellPrice || sellPrice === 0)) {
             document.getElementById('result').style.display = 'block'
             document.getElementsByClassName('depoDiv')[0].style.display = 'block';
@@ -81,41 +80,6 @@ function CalculateBrokerage() {
             document.getElementById('STT').value = stt;
             document.getElementById('DepositoryCharges').value = depoCharges;
         }
-    } else {
-        if (buyQuantity && Number.isInteger(buyQuantity) && buyPrice && (sellPrice || sellPrice === 0)) {
-            document.getElementById('result').style.display = 'block'
-            document.getElementsByClassName('depoDiv')[0].style.display = 'none';
-            const totBuyPrice = buyQuantity * buyPrice;
-            const totSellPrice = sellQuantity * sellPrice;
-            const lotSize = parseInt(document.getElementById('LotSize').value);
-            const buyBrokerage = lotSize * 40;
-            const sellBrokerage = lotSize * 40;
-            const totalBrokerage = buyBrokerage + sellBrokerage;
-            const payOut = totSellPrice - totBuyPrice;
-            const etc = RoundOffValue((totBuyPrice + totSellPrice) * 0.0005);
-            const sebi = RoundOffValue((totBuyPrice + totSellPrice) * 0.0000005);
-            const gst = RoundOffValue((totalBrokerage + etc + sebi) * 0.09);
-            const totalGST = gst * 2;
-            const sd = RoundOffValue(totBuyPrice * 0.0000325);
-            const stt = RoundOffValue(totSellPrice * 0.0005);
-            const depoCharges = 25;
-            const totalDed = RoundOffValue(totalBrokerage + etc + sebi + totalGST + stt + sd + depoCharges);
-            const netAmount = payOut - totalDed;
-            document.getElementById('NetAmount').value = netAmount;
-            document.getElementById('AmountRequired').value = totBuyPrice;
-            document.getElementById('TotalDeduction').value = totalDed;
-            document.getElementById('PayLabel').innerHTML = (netAmount > 0) ? 'Payout Obligation' : 'Pay in Obligation';
-            document.getElementById('PayOut').value = payOut;
-            document.getElementById('Brokerage').value = totalBrokerage;
-            document.getElementById('ETC').value = etc;
-            document.getElementById('SEBI').value = sebi;
-            document.getElementById('SGST').value = gst;
-            document.getElementById('CGST').value = gst;
-            document.getElementById('GST').value = totalGST;
-            document.getElementById('SD').value = sd;
-            document.getElementById('STT').value = stt;
-            document.getElementById('DepositoryCharges').value = depoCharges;
-        }
     }
 }
 
@@ -124,43 +88,15 @@ function RoundOffValue(val) {
 }
 
 $(window).on('load', function () {
-    document.getElementById('lotSizeDiv').style.display = 'none';
     $('#BuyQuantity').keyup(function () {
         $('#SellQuantity').val(this.value);
     });
-    $('#intraday').change(function () {
-        if (document.getElementById('intraday').checked) {
+    $('#intraday').change(function(){
+        if(document.getElementById('intraday').checked)
             document.getElementById('positional').checked = false;
-            document.getElementById('options').checked = false;
-            document.getElementById('lotSizeDiv').style.display = 'none';
-            document.getElementById('BuyPrice').value = null;
-            document.getElementById('SellPrice').value = null;
-            document.getElementById('BuyQuantity').value = null;
-            document.getElementById('SellQuantity').value = null;
-        }
     });
-    $('#positional').change(function () {
-        if (document.getElementById('positional').checked) {
+    $('#positional').change(function(){
+        if(document.getElementById('positional').checked)
             document.getElementById('intraday').checked = false;
-            document.getElementById('options').checked = false;
-            document.getElementById('lotSizeDiv').style.display = 'none';
-            document.getElementById('BuyPrice').value = null;
-            document.getElementById('SellPrice').value = null;
-            document.getElementById('BuyQuantity').value = null;
-            document.getElementById('SellQuantity').value = null;
-        }
-    });
-    $('#options').change(function () {
-        if (document.getElementById('options').checked) {
-            document.getElementById('intraday').checked = false;
-            document.getElementById('positional').checked = false;
-            document.getElementById('lotSizeDiv').style.display = 'block';
-            document.getElementById('LotSize').value = 1;
-            document.getElementById('BuyPrice').value = 400;
-            document.getElementById('BuyQuantity').value = 25;
-            document.getElementById('SellQuantity').value = 25;
-        } else {
-            document.getElementById('LotSize').style.display = 'none';
-        }
     });
 });
